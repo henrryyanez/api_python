@@ -1,0 +1,248 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Test Inove</title>
+    <meta content="" name="descriptison">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{% static 'img/favicon.png' %}" rel="icon">
+    <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/venobox/venobox.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/owl.carousel/assets/owl.carousel.min.css' %}assets/" rel="stylesheet">
+    <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <!-- =======================================================
+    * Template Name: iPortfolio - v1.2.0
+    * Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header id="header">
+    <div class="d-flex flex-column">
+
+        <div class="profile">
+            <img src="{% static 'img/profile-img.jpg' %}" alt="" class="img-fluid rounded-circle">
+            <h1 class="text-light"><a href="#">Project</a></h1>
+            <div class="social-links mt-3 text-center">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+        </div>
+
+        <nav class="nav-menu">
+            <ul>
+
+                <li>
+                    {% if request.user.is_authenticated %}
+                        <a href=#skills>
+                            <i class="bx bx-user"></i>  
+                                Bienvenido &#9617; <strong>{{ request.user.username | title }}</strong>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'login' %}">
+                            <i class="bx bx-door-open"></i> Login
+                        </a>
+                    {% endif %}
+
+                </li>
+
+                <li class="active"><a href="#hero"><i class="bx bx-home"></i> <span>Home</span></a></li>
+                <!-- <li><a href="#about"><i class="bx bx-user"></i> <span>About</span></a></li>
+                <li><a href="#portfolio"><i class="bx bx-book-content"></i> Portfolio</a></li>
+                <li><a href="#services"><i class="bx bx-server"></i> Services</a></li>
+                <li><a href="#contact"><i class="bx bx-envelope"></i> Contact</a></li> -->
+                <li><a href="#skills"><i class="bx bx-file-blank"></i> <span>Tablero</span></a></li>
+
+            </ul>
+        </nav><!-- .nav-menu -->
+        <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
+
+    </div>
+</header><!-- End Header -->
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex flex-column justify-content-center align-items-center">
+    <div class="hero-container" data-aos="fade-in">
+
+        <!--<h1>CyberSOC</h1>-->
+
+
+        <h1>
+            {% if request.user.is_authenticated %}
+                        Bienvenido <strong>"{{ request.user.username | title }}"</strong>
+            {% else %}
+                        <strong>Sistema Para Validadar de Spam</strong>
+            {% endif %}
+
+        </h1>
+
+
+        <p>
+            #
+            <span class="typed" data-typed-items="Cybersecurity, Developer, Sysadmin, GNU/Linux, Automation, Python, Scripting"></span>
+        </p>
+    </div>
+</section><!-- End Hero -->
+
+<main id="main">
+
+    <!-- ======= Tablero Section ======= -->
+   
+
+    <li>
+        {% if request.user.is_authenticated %}
+
+            <section id="skills" class="skills section-bg">
+                <div class="container">
+                    <div class="section-title"></div>
+                    <div>Resúmen de peticiones de &#9617; <strong>{{ request.user.username | title }}</strong></div>
+                    <div class="section-title">
+                        <h2>Resúmen de Peticiones vía API para validar SPAM o HAM</h2>
+                        <p>En esta sección se puede ver el resúmen de cantidad de peticiones realizadas para determinar si un text/header es SPAM o HAM.</p>
+                    </div>
+        
+                    <div class="row skills-content">
+        
+                        <div class="col-lg-6" data-aos="fade-up">
+        
+                            <div class="progress">
+                                <span class="skill">HTML <i class="val">100%</i></span>
+                                <div class="progress-bar-wrap">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                                         aria-valuemax="100"></div>
+                                </div>
+                            </div>
+        
+                            <div class="progress">
+                                <span class="skill">CSS <i class="val">90%</i></span>
+                                <div class="progress-bar-wrap">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0"
+                                         aria-valuemax="100"></div>
+                                </div>
+                            </div>
+        
+                            <div class="progress">
+                                <span class="skill">JavaScript <i class="val">75%</i></span>
+                                <div class="progress-bar-wrap">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0"
+                                         aria-valuemax="100"></div>
+                                </div>
+                            </div>
+        
+                        </div>
+        
+                        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+        
+                            <div class="progress">
+                                <span class="skill">PHP <i class="val">80%</i></span>
+                                <div class="progress-bar-wrap">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                                         aria-valuemax="100"></div>
+                                </div>
+                            </div>
+        
+                            <div class="progress">
+                                <span class="skill">WordPress/CMS <i class="val">80%</i></span>
+                                <div class="progress-bar-wrap">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                                         aria-valuemax="100"></div>
+                                </div>
+                            </div>
+        
+                            <div class="progress">
+                                <span class="skill">Photoshop <i class="val">55%</i></span>
+                                <div class="progress-bar-wrap">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0"
+                                         aria-valuemax="100"></div>
+                                </div>
+                            </div>
+        
+                        </div>
+        
+                    </div>
+        
+                </div>
+            </section><!-- End Skills Section -->
+
+        {% else %}
+        <section id="resume" class="skills section-bg">
+            <div class="container">
+
+                <strong> Para ver esta sección debes loguearte en el sistema: </strong><a href="{% url 'login' %}">
+                <i class="bx bx-door-open"></i> Login
+
+            </div>
+        </section>
+        {% endif %}
+
+    </li>
+
+
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<!--<footer id="footer">
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong><span>iPortfolio</span></strong>
+        </div>
+        <div class="credits">
+            <!-- All the links in the footer should remain intact.
+            <!-- You can delete the links only if you purchased the pro version.
+            <!-- Licensing information: https://bootstrapmade.com/license/
+            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+    </div>
+</footer> -->
+
+<!-- End  Footer -->
+
+<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static '/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+<script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+<script src="{% static 'vendor/waypoints/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'vendor/counterup/counterup.min.js' %}"></script>
+<script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'vendor/venobox/venobox.min.js' %}"></script>
+<script src="{% static 'vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+<script src="{% static 'vendor/typed.js/typed.min.js' %}"></script>
+<script src="{% static 'vendor/aos/aos.js' %}"></script>
+
+<!-- Template Main JS File -->
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>
