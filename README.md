@@ -42,9 +42,9 @@ Va a responder:
 ```
 Iniciamos, Si intentamos ingrasar con credenciales válidas:
 ```
-	http http://127.0.0.1:8000/history/30/ "Authorization: Token <TOKEN>"
+	http http://127.0.0.1:8000/history/1/ "Authorization: Token <TOKEN>"
 ```
-we get the movie with id = 3
+Se va a obtener el resultado de las consultas almacenadasm en este caso solo vemos una:
 ```
 [
     {
