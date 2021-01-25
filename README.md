@@ -1,23 +1,18 @@
 # API DJANGO
 
-## Requirements
+## Requerimientos
 - Python 3.8
 - Django (2.1)
 - Django REST Framework
 - Django Rest Auth
 
-## Installation
+## Instalación
 ```
 	pip install django
 	pip install djangorestframework
 	pip install django-rest-auth
 	pip install django-allauth
 ```
-
-## Structure
-In a RESTful API, endpoints (URLs) define the structure of the API and how end users access data from our application using the HTTP methods - GET, POST, PUT, DELETE. Endpoints should be logically organized around _collections_ and _elements_, both of which are resources.
-
-In our case, we have one single resource, `movies`, so we will use the following URLS - `/movies/` and `/movies/<id>` for collections and elements, respectively:
 
 Endpoint |HTTP Method | CRUD Method | Result
 -- | -- |-- |--
@@ -40,11 +35,11 @@ Va a responder:
 ```
  {  "detail": "Cabecera token inválida. Las credenciales no fueron suministradas."  }
 ```
-Iniciamos, Si intentamos ingrasar con credenciales válidas:
+Iniciamos, Si intentamos ingresar con credenciales válidas:
 ```
 	http http://127.0.0.1:8000/history/1/ "Authorization: Token <TOKEN>"
 ```
-Se va a obtener el resultado de las consultas almacenadasm en este caso solo vemos una:
+Se va a obtener el resultado de las consultas almacenadas, en este caso vemos:
 ```
 [
     {
@@ -79,7 +74,7 @@ http POST http://127.0.0.1:8000/rest-auth/logout/ "Authorization: Token <YOUR_TO
 ```
 
 
-### Commands
+### Comandos
 ```
 http POST http://127.0.0.1:8000/process_email/ "Authorization: Token <YOUR_TOKEN>" "texto": "www.google.com href Freee free pack href"
 
