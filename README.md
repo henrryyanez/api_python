@@ -1,8 +1,7 @@
-# SIMPLE CRUD API WITH DJANGO REST FRAMEWORK
-[Django REST framework](http://www.django-rest-framework.org/) is a powerful and flexible toolkit for building Web APIs.
+# API DJANGO
 
 ## Requirements
-- Python 3.6
+- Python 3.8
 - Django (2.1)
 - Django REST Framework
 - Django Rest Auth
@@ -22,86 +21,75 @@ In our case, we have one single resource, `movies`, so we will use the following
 
 Endpoint |HTTP Method | CRUD Method | Result
 -- | -- |-- |--
-`movies` | GET | READ | Get all movies
-`movies/:id` | GET | READ | Get a single movie
-`movies`| POST | CREATE | Create a new movie
-`movies/:id` | PUT | UPDATE | Update a movie
-`movies/:id` | DELETE | DELETE | Delete a movie
+`history/:id/` | GET | READ | devuelve las ultimas consultas realizadas limitando la cantidad de salidas
+`process_email/`| POST | CREATE | Crea una nueva consulta de procesamiento predictivo
 
-## Use
-We can test the API using [curl](https://curl.haxx.se/) or [httpie](https://github.com/jakubroztocil/httpie#installation). Httpie is a user friendly http client that's written in Python. Let's install that.
+## Uso
+Podemos usar [curl](https://curl.haxx.se/) o Postman para realizar las pruebas necesarias.
 
-You can install httpie using pip:
-```
-pip install httpie
-```
 
-First, we have to start up Django's development server.
+Primero, iniciamos el servidor con el siguiente comando.
 ```
 	python manage.py runserver
 ```
-Only authenticated users can use the API services, for that reason if we try this:
+Solo los usuarios autenticados pueden hacer uso de la API:
 ```
-	http  http://127.0.0.1:8000/api/v1/movies/3
+	http  http://127.0.0.1:8000/history/30/
 ```
-we get:
+Va a responder:
 ```
- {  "detail":  "You must be authenticated"  }
+ {  "detail": "Cabecera token inválida. Las credenciales no fueron suministradas."  }
 ```
-Instead, if we try to access with credentials:
+Iniciamos, Si intentamos ingrasar con credenciales válidas:
 ```
-	http http://127.0.0.1:8000/api/v1/movies/3 "Authorization: Token 7530ec9186a31a5b3dd8d03d84e34f80941391e3"
+	http http://127.0.0.1:8000/history/30/ "Authorization: Token <TOKEN>"
 ```
 we get the movie with id = 3
 ```
-{  "title":  "Avengers",  "genre":  "Superheroes",  "year":  2012,  "creator":  "admin"  }
+[
+    {
+        "text": "www.google.com href Freee free pack href",
+        "result": "HAM",
+        "created_at": "2021-01-24T22:29:00.992888Z"
+    }
+]
 ```
 
-## Login and Tokens
+## Login y Tokens
 
-To get a token first we have to login
+Para obtener un token primero tienes que loguearte
 ```
-	http http://127.0.0.1:8000/rest-auth/login/ username="admin" password="root1234"
+	http http://127.0.0.1:8000/rest-auth/login/ username="USERNAME" password="PASSWORD"
 ```
-after that, we get the token
+Luego vas a poder ver tu token
 ```
 {
-    "key": "2d500db1e51153318e300860064e52c061e72016"
+    "key": "<TOKEN>"
 }
 ```
-**ALL request must be authenticated with a valid token, otherwise they will be invalid**
+**Todos los request necesitan un token válido, de lo contrario no podrá ser procesado**
 
-We can create new users. (password1 and password2 must be equal)
+Nosotros podemos crear usuarios. (password1 y password2 deben ser iguales)
 ```
 http POST http://127.0.0.1:8000/rest-auth/registration/ username="USERNAME" password1="PASSWORD" password2="PASSWORD"
 ```
-And we can logout, the token must be your actual token
+Nosotros podemos hacer logout de la API , el token debe ser el actual:
 ```
 http POST http://127.0.0.1:8000/rest-auth/logout/ "Authorization: Token <YOUR_TOKEN>" 
 ```
 
-The API has some restrictions:
--   The movies are always associated with a creator (user who created it).
--   Only authenticated users may create and see movies.
--   Only the creator of a movie may update or delete it.
--   Unauthenticated requests shouldn't have access.
 
 ### Commands
 ```
-http http://127.0.0.1:8000/api/v1/movies/ "Authorization: Token <YOUR_TOKEN>"
-http GET http://127.0.0.1:8000/api/v1/movies/3 "Authorization: Token <YOUR_TOKEN>"
-http POST http://127.0.0.1:8000/api/v1/movies/ "Authorization: Token <YOUR_TOKEN>" title="Ant Man and The Wasp" genre="Action" year=2018
-http PUT http://127.0.0.1:8000/api/v1/movies/3 "Authorization: Token <YOUR_TOKEN>" title="AntMan and The Wasp" genre="Action" year=2018
-http DELETE http://127.0.0.1:8000/api/v1/movies/3 "Authorization: Token <YOUR_TOKEN>"
+http POST http://127.0.0.1:8000/process_email/ "Authorization: Token <YOUR_TOKEN>" "texto": "www.google.com href Freee free pack href"
+
 ```
 
-### Pagination
-The API supports pagination, by default responses have a page_size=10 but if you want change that you can pass through params page=size=X
+### Consulta de peticiones realizadas con un limit de resultados:
+La api soporte un numero entero para mostrar ese cantidad indicada: int=50:
 ```
-http http://127.0.0.1:8000/api/v1/movies/?page=1 "Authorization: Token <YOUR_TOKEN>"
-http http://127.0.0.1:8000/api/v1/movies/?page=3 "Authorization: Token <YOUR_TOKEN>"
-http http://127.0.0.1:8000/api/v1/movies/?page=3&page_size=15 "Authorization: Token <YOUR_TOKEN>"
+http http://127.0.0.1:8000/history/50/ "Authorization: Token <YOUR_TOKEN>"
 ```
 
-Finally, I provide a DB to make these tests.
+Listo ya puedes comenzar a probar.
 
